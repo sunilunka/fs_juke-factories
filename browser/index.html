@@ -8,6 +8,8 @@
 	<script src="/lodash/index.js"></script>
 	<script src="/angular/angular.js"></script>
 	<script src="/js/module.js"></script>
+	<script src="/js/factories/player.js"></script>
+	<script src="/js/factories/StatsFactory.js"></script>
 	<script src="/js/controllers/album.js"></script>
 	<script src="/js/controllers/player.js"></script>
 </head>
@@ -27,7 +29,7 @@
 		<div class="col-xs-10">
 			<div class="album" ng-controller="AlbumCtrl">
 				<p>
-					<h3>{{ album.name }}</h3>
+					<h3>{{ album.name }} <span>{{ album.totalTime }}</span></h3>
 					<img ng-src="{{ album.imageUrl }}" class="img-thumbnail">
 				</p>
 				<table class='table'>

@@ -20,9 +20,12 @@
 // 	imageUrl: 'http://fillmurray.com/300/300'
 // };
 
-app.controller('AlbumCtrl', function ($scope, $http, $rootScope) {
+app.controller('AlbumCtrl', function ($scope, $http, $rootScope, StatsFactory) {
 	// $scope.album = fakeAlbum;
-	$http.get('/api/albums/561e86b67cc60c7cebd21a57')
+
+
+
+	$http.get('/api/albums/561ea3e002ba149207b50ac3')
 	.then(function (response) {
 		var album = response.data;
 		album.imageUrl = '/api/albums/' + album._id + '.image';
@@ -33,7 +36,16 @@ app.controller('AlbumCtrl', function ($scope, $http, $rootScope) {
 				return albumArtists[artistId];
 			});
 		});
+
 		$scope.album = album;
+
+		StatsFactory.totalTime(album).then(function(time){
+			time = Math.round(time / 60); 
+			$scope.album.totalTime = time;
+			console.log("Total time", $scope.album.totalTime);
+		})
+
+		
 	});
 	$scope.start = function (s) {
 		$rootScope.$broadcast('startIt', {
